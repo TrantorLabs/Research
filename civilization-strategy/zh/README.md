@@ -1,18 +1,16 @@
-# Soulseed Civilization Strategy — Chinese Canon
+# 文明思想与研究作品｜中文
 
-Four source-preserving Chinese research and civilization-strategy documents by Kun Yuan, published here as publicly accessible mirrors of the original founder-reviewed texts. The Chinese texts are the authoritative source for any subsequent English translations. This is strategic research material, not a CV or a Tailwind-specific rewrite.
+这四篇作品共同讨论第二智慧时代的人类文明、AI 安全、原生智能与主体性。作品相互联系，也可以独立阅读。
 
-| Document | Chinese text | Source repository |
-|---|---|---|
-| Civilization Charter V1.2 | [Read full text](./01-civilization-charter-v1.2.md) | [Original source](https://github.com/RcityHunter/kunyuanzhuanshu/blob/main/00-Soulseed长期战略母本/02-战略正式正典/SOULSEED-CIVILIZATION-CHARTER-01-面向第二智慧时代的文明战略总纲-v1.2.md) |
-| AI Safety A V1.0 | [Read full text](./02-ai-safety-a-v1.0.md) | [Original source](https://github.com/RcityHunter/kunyuanzhuanshu/blob/main/00-Soulseed长期战略母本/02-战略正式正典/SOULSEED-STRATEGY-A-CANON-01-人工智能安全从行为合规到真实控制与持续责任-v1.0.md) |
-| MindOS B V1.0 | [Read full text](./03-mindos-b-v1.0.md) | [Original source](https://github.com/RcityHunter/kunyuanzhuanshu/blob/main/00-Soulseed长期战略母本/02-战略正式正典/SOULSEED-STRATEGY-B-CANON-01-MindOS原生心智与可治理的智能秩序-v1.0.md) |
-| Human Agency C V1.0 | [Read full text](./04-human-agency-c-v1.0.md) | [Original source](https://github.com/RcityHunter/kunyuanzhuanshu/blob/main/00-Soulseed长期战略母本/02-战略正式正典/SOULSEED-STRATEGY-C-CANON-01-分叉文明人类主体性与共生未来-v1.0.md) |
+| 作品 | 中文全文 | English |
+| --- | --- | --- |
+| 第二智慧时代：人类与新智慧的文明秩序 | [阅读](./01-second-age-of-intelligence.md) | [Read](../en/01-second-age-of-intelligence.md) |
+| 人工智能安全：从行为合规到真实控制与持续责任 | [阅读](./02-ai-safety-a-v1.0.md) | [Read](../en/02-ai-safety-a.md) |
+| MindOS：为第二智慧时代建立原生心智与可治理的智能秩序 | [阅读](./03-mindos-b-v1.0.md) | [Read](../en/03-mindos-b.md) |
+| 分叉文明：在 AI 时代守护人类主体性与共生未来 | [阅读](./04-human-agency-c-v1.0.md) | [Read](../en/04-human-agency-c.md) |
 
-Founder: **Kun Yuan** · TRANTOR LABS, Singapore
+作者：**坤元（Kun Yuan）** · TRANTOR LABS · 新加坡
 
-Website: https://www.trantorlabs.sg/
+本文集以中文作品为思想与语言母本，英文独立翻译。三大研究领域 A（安全科学与责任治理）、B（原生心智与基础架构）、C（人类主体性与文明风险）各有独立研究对象，又围绕安全与共存形成长期联系。
 
-Related public research: [SoulAuth](https://github.com/TrantorLabs/SoulAuth), [ISA Artifact](https://github.com/TrantorLabs/ISA-Artifact), [Subject-rooted governance](https://github.com/TrantorLabs/subject-rooted-governance).
-
-Note: The titles and filenames of these mirrors are navigational. The four Chinese document bodies below are copied without alteration.
+公开研究论文和工件链接见各篇正文。技术实现、科学主张及相关机构的实际责任以对应研究与可核查证据为依据。
