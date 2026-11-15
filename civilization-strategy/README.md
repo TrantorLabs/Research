@@ -8,14 +8,14 @@ We investigate AI safety, AI-native minds, human subjecthood, and the foundation
 
 ## 四篇作品 · Four Works
 
-| 主题 / Domain | 中文 | English |
-| --- | --- | --- |
-| **文明思想 / Civilizational Thought** | [第二智慧时代：人类与新智慧的文明秩序](./zh/01-second-age-of-intelligence.md) | [The Second Age of Intelligence](./en/01-second-age-of-intelligence.md) |
-| **A · AI Safety** | [人工智能安全：从行为合规到真实控制与持续责任](./zh/02-ai-safety-a-v1.0.md) | [AI Safety: From Behavioral Compliance to Effective Control and Persistent Accountability](./en/02-ai-safety-a.md) |
-| **B · MindOS** | [MindOS：为第二智慧时代建立原生心智与可治理的智能秩序](./zh/03-mindos-b-v1.0.md) | [MindOS: Building AI-Native Minds and Governable Intelligence](./en/03-mindos-b.md) |
-| **C · Human Subjecthood** | [分叉文明：在 AI 时代守护人类主体性与共生未来](./zh/04-human-agency-c-v1.0.md) | [The Civilizational Fork: Safeguarding Human Subjecthood](./en/04-human-agency-c.md) |
+| 主题 / Domain | 中文 | English | PDF |
+| --- | --- | --- | --- |
+| **文明思想 / Civilizational Thought** | [第二智慧时代：人类与新智慧的文明秩序](./zh/01-second-age-of-intelligence.md) | [The Second Age of Intelligence](./en/01-second-age-of-intelligence.md) | [02 PDF](./pdf/02_Second_Age_of_Intelligence_EN.pdf) |
+| **A · AI Safety** | [人工智能安全：从行为合规到真实控制与持续责任](./zh/02-ai-safety-a-v1.0.md) | [AI Safety: From Behavioral Compliance to Effective Control and Persistent Accountability](./en/02-ai-safety-a.md) | [03 PDF](./pdf/03_AI_Safety_Research_EN.pdf) |
+| **B · MindOS** | [MindOS：为第二智慧时代建立原生心智与可治理的智能秩序](./zh/03-mindos-b-v1.0.md) | [MindOS: Building AI-Native Minds and Governable Intelligence](./en/03-mindos-b.md) | [04 PDF](./pdf/04_MindOS_Research_and_Development_EN.pdf) |
+| **C · Human Subjecthood** | [分叉文明：在 AI 时代守护人类主体性与共生未来](./zh/04-human-agency-c-v1.0.md) | [The Civilizational Fork: Safeguarding Human Subjecthood](./en/04-human-agency-c.md) | [05 PDF](./pdf/05_Human_Subjecthood_and_Existential_Risk_EN.pdf) |
 
-[中文作品导览](./zh/README.md) · [English Reading Guide](./en/README.md)
+[中文作品导览](./zh/README.md) · [English Reading Guide](./en/README.md) · [English PDF Editions](./pdf/README.md)
 
 **作者 / Author:** Kun Yuan  
 **研究机构 / Research:** TRANTOR LABS · Singapore  
