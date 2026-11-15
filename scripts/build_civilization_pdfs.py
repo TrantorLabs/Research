@@ -52,7 +52,7 @@ def build():
   md=src.read_text(encoding="utf-8")
   if not md.startswith("# ") or len(md)<12000:raise ValueError("Incomplete source: "+str(src))
   body=html_from_markdown(src)
-  body,n=re.subn(r"<h1(\\s|>)",rf'<h1 data-number="{number}"\\1',body,count=1)
+  body,n=re.subn(r"<h1(\s|>)",rf'<h1 data-number="{number}"\1',body,count=1)
   if n!=1:raise RuntimeError("Missing h1: "+str(src))
   html=f"<!doctype html><html lang='en'><head><meta charset='utf-8'></head><body><div class='running'>{number} · Kun Yuan — {escape(short)}</div>{body}</body></html>"
   doc=HTML(string=html,base_url=str(INPUT),media_type="print").render(stylesheets=[CSS(string=STYLE)])
