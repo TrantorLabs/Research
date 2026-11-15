@@ -1,0 +1,76 @@
+name: Export English civilization research PDFs
+
+on:
+  push:
+    branches:
+      - docs/civilization-pdf-export-20261116
+    paths:
+      - .github/workflows/build-civilization-pdfs.yml
+      - scripts/build_civilization_pdfs.py
+      - civilization-strategy/en/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render-pdfs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install typography and PDF dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y pandoc fonts-lato fonts-noto-core fonts-noto-cjk
+          python -m pip install --upgrade pip
+          python -m pip install weasyprint==68.0 pypdf
+
+      - name: Generate four full-length English PDFs
+        run: |
+          python scripts/build_civilization_pdfs.py
+
+      - name: Validate complete PDFs and hyperlinks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          base=Path("civilization-strategy/pdf")
+          files=[
+              ("02_Second_Age_of_Intelligence_EN.pdf","II. Humanity"),
+              ("03_AI_Safety_Research_EN.pdf","Chapter One"),
+              ("04_MindOS_Research_and_Development_EN.pdf","Chapter Seven"),
+              ("05_Human_Subjecthood_and_Existential_Risk_EN.pdf","Chapter Seven"),
+          ]
+          for name,needle in files:
+              file=base/name
+              reader=PdfReader(str(file))
+              pages=len(reader.pages)
+              text=' '.join((p.extract_text() or '') for p in reader.pages)
+              urls=sum(len(p.get("/Annots", [])) for p in reader.pages)
+              assert pages>=4,(name,pages)
+              assert len(text)>5000,(name,len(text))
+              assert needle in text,(name,needle)
+              assert urls>=4,(name,"external annotations",urls)
+              print(f"{name}: {pages} pages; extracted {len(text)} chars; {urls} link annotations")
+          PY
+
+      - name: Commit exported PDF files to publication branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add civilization-strategy/pdf/*.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "docs(pdf): export four complete English research works 02-05"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: Upload PDF backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: civilization-strategy-english-pdfs-02-to-05
+          path: civilization-strategy/pdf/*.pdf
+          if-no-files-found: error
