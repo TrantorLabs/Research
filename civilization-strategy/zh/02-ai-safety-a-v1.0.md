@@ -208,7 +208,7 @@ A1 将围绕这些问题，持续研究风险识别、失控传播、安全条�
 
 ### 5.2 A2｜内部结构化对齐与可验证安全
 
-**Internal Structural Alignment & Verifiable Safety**
+**Internal Structured Alignment & Verifiable Safety**
 
 A2 研究指定安全约束是否真实参与高后果判断与行动形成，以及人类如何获得足以验证这种真实控制的证据。这是我们已经通过内部结构化对齐（ISA）形成代表性理论成果的重要研究方向。
 
