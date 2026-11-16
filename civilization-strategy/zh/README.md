@@ -9,6 +9,8 @@
 | MindOS：为第二智慧时代建立原生心智与可治理的智能秩序 | [阅读](./03-mindos-b-v1.0.md) | [Read](../en/03-mindos-b.md) |
 | 分叉文明：在 AI 时代守护人类主体性与共生未来 | [阅读](./04-human-agency-c-v1.0.md) | [Read](../en/04-human-agency-c.md) |
 
+**首篇文明总纲已完成 Zenodo 中英文双语正式出版（2026-11-16）：** [正式 DOI 10.5281/zenodo.24273009](https://doi.org/10.5281/zenodo.24273009) · [出版回执与文件校验](../publication-records/02-second-age-of-intelligence/README.md)。
+
 作者：**坤元（Kun Yuan）** · TRANTOR LABS · 新加坡
 
 本文集以中文作品为思想与语言母本，英文独立翻译。三大研究领域 A（安全科学与责任治理）、B（原生心智与基础架构）、C（人类主体性与文明风险）各有独立研究对象，又围绕安全与共存形成长期联系。
