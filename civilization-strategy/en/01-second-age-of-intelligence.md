@@ -53,8 +53,6 @@ As AI enters the structures of human action, knowledge, institutions, judgment, 
 
 I group five categories of civilizational risk requiring study into **Survival Risk, Reality Risk, Institutional Risk, Human Agency Risk, and Human Meaning Risk**.
 
-These categories concern different conditions for the continued existence of human civilization. Whether a particular harm rises to the level of existential risk requires examining its scale, mechanisms of propagation, duration, intergenerational effects, and prospects for recovery. A local technical failure or a change in an individual's life is not, by itself, sufficient evidence of an existential crisis at the civilizational level.
-
 ### 1. Survival Risk
 
 **Can humanity continue to survive safely?**
