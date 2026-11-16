@@ -1,0 +1,150 @@
+name: One-off export of bilingual civilization research PDFs
+on:
+  push:
+    branches: [docs/bilingual-civilization-pdfs-20261116]
+    paths: ['.github/workflows/one-off-bilingual-civilization-pdfs.yml']
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: docs/bilingual-civilization-pdfs-20261116
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Markdown rendering and Chinese font
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y pandoc fonts-noto-cjk
+          python -m pip install weasyprint==68.0 pymupdf
+      - name: Render, inspect and archive eight complete documents
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import subprocess, zipfile, os
+          from weasyprint import HTML
+          import fitz
+
+          root = Path('civilization-strategy')
+          zh = root/'zh'
+          en = root/'en'
+          out = zh/'pdf'
+          out.mkdir(exist_ok=True)
+          archive_dir = root/'archives'/'2026-11-16'
+          archive_dir.mkdir(parents=True, exist_ok=True)
+          pairs = [
+              ('02', '01-second-age-of-intelligence.md',
+               '02_ZH_Second_Age_of_Intelligence.pdf',
+               '02_The_Second_Age_of_Intelligence.pdf',
+               '01-second-age-of-intelligence.md'),
+              ('03', '02-ai-safety-a-v1.0.md',
+               '03_ZH_AI_Safety_Real_Control_and_Accountability.pdf',
+               '03_AI_Safety_Effective_Control_and_Accountability.pdf',
+               '02-ai-safety-a.md'),
+              ('04', '03-mindos-b-v1.0.md',
+               '04_ZH_MindOS_Native_Minds_and_Governable_Intelligence.pdf',
+               '04_MindOS_AI_Native_Minds_and_Governable_Intelligence.pdf',
+               '03-mindos-b.md'),
+              ('05', '04-human-agency-c-v1.0.md',
+               '05_ZH_Civilizational_Fork_Human_Agency.pdf',
+               '05_The_Civilizational_Fork_Human_Agency.pdf',
+               '04-human-agency-c.md')
+          ]
+          css = """
+          @page {size:A4; margin:15mm 16mm;}
+          body {font-family:'Noto Serif CJK SC', 'Noto Sans CJK SC',serif;
+                color:#202020; font-size:10pt;line-height:1.48;}
+          h1,h2,h3,h4 {font-family:'Noto Sans CJK SC',sans-serif;
+                        line-height:1.34;break-after:avoid;color:#1b2633;}
+          h1 {font-size:17pt;margin:0 0 12pt;}
+          h2 {font-size:12.5pt;margin:15pt 0 7pt;}
+          h3 {font-size:11pt;margin:11pt 0 6pt;}
+          h4 {font-size:10.5pt;}
+          p,li {orphans:2; widows:2;}
+          p {margin:0 0 8pt;}
+          ul,ol {margin:6pt 0 8pt;padding-left:20pt;}
+          li {margin:3pt 0;}
+          a {color:#155c92;text-decoration:none;overflow-wrap:anywhere;word-break:break-word;}
+          hr {border:0;border-top:.6pt solid #bbb;margin:13pt 0;}
+          pre,code {white-space:pre-wrap;overflow-wrap:anywhere;}
+          img {max-width:100%;}
+          table {border-collapse:collapse;width:100%;}
+          th,td {border:1px solid #aaa;padding:4pt;text-align:left;vertical-align:top;}
+          blockquote {padding-left:9pt;border-left:2pt solid #bbb;margin:8pt 0;}
+          """
+          all_files = []
+          evidence = []
+          for number, cn_md_name, cn_pdf_name, en_pdf_name, en_md_name in pairs:
+              md_path = zh/cn_md_name
+              content = md_path.read_text(encoding='utf-8')
+              assert len(content)>4000, f'truncated source: {md_path}'
+              html = subprocess.check_output(
+                  ['pandoc','-f','markdown+autolink_bare_uris',
+                   '-t','html5',str(md_path)],text=True)
+              pdf_path = out/cn_pdf_name
+              HTML(string='<html lang="zh-CN"><meta charset="utf-8"><style>'
+                   +css+'</style><body>'+html+'</body></html>',
+                   base_url=str(zh.resolve())).write_pdf(str(pdf_path))
+              for lang, path, source in (
+                  ('ZH',pdf_path,md_path),
+                  ('EN',en/'pdf'/en_pdf_name,en/en_md_name)):
+                  assert path.exists(), f'missing {path}'
+                  assert path.stat().st_size>10000,f'too small: {path}'
+                  with fitz.open(path) as doc:
+                      pages=doc.page_count
+                      text=''.join(page.get_text() for page in doc)
+                      links=sum(len(page.get_links()) for page in doc)
+                      assert pages>1 and len(text)>2000,f'empty PDF {path}'
+                      assert links>=3, f'no external references: {path}'
+                      evidence.append((number,lang,pages,links,len(text),path.stat().st_size))
+                  all_files.append((number,lang,path,source))
+          for row in evidence:print('PASS',*row)
+
+          zip_path=archive_dir/'02-05_Soulseed_Civilization_Research_8_PDFs_ZH_EN.zip'
+          readme = [
+              'Soulseed civilization research | Bilingual publication archive',
+              'Eight complete PDF documents: Chinese & English, series 02-05.',
+              'Source: TrantorLabs/Research, civilization-strategy/{zh,en} in the repository.',
+              'No translation, paraphrase or trimming was performed in this export.',
+              'The four English PDFs are existing public outputs copied unchanged.',
+              'The four Chinese PDFs are generated from the current Chinese Markdown texts.',
+              'Original Markdown source remains in the public GitHub repository.',
+              '',
+              'Files:'
+          ]
+          sums=[]
+          for number,lang,path,source in all_files:
+              filename=f'{number}_{lang}_{path.name.split("_",1)[1]}'
+              digest=sha256(path.read_bytes()).hexdigest()
+              source_sha=sha256(source.read_bytes()).hexdigest()
+              readme.append(f'{filename} | source={source.as_posix()} | source_SHA256={source_sha}')
+              sums.append(f'{digest}  {filename}')
+          with zipfile.ZipFile(zip_path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for number,lang,path,source in all_files:
+                  filename=f'{number}_{lang}_{path.name.split("_",1)[1]}'
+                  z.write(path,arcname=filename)
+              z.writestr('README.txt','\n'.join(readme)+'\n')
+              z.writestr('SHA256SUMS.txt','\n'.join(sums)+'\n')
+          with zipfile.ZipFile(zip_path) as z:
+              assert len([n for n in z.namelist() if n.endswith('.pdf')])==8
+              assert z.testzip() is None
+          (archive_dir/'README.txt').write_text('\n'.join(readme)+'\n',encoding='utf-8')
+          (archive_dir/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n',encoding='utf-8')
+          print('ARCHIVE_OK',zip_path,zip_path.stat().st_size,'bytes')
+          PY
+      - name: Save the generated bundle as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: civilization-research-eight-pdfs
+          path: civilization-strategy/archives/2026-11-16/02-05_Soulseed_Civilization_Research_8_PDFs_ZH_EN.zip
+          retention-days: 7
+      - name: Commit verified PDF outputs and the bundle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add civilization-strategy/zh/pdf/*.pdf civilization-strategy/archives/2026-11-16/
+          git diff --cached --quiet || (git commit -m "docs: publish complete Chinese PDFs and bilingual eight-document archive [skip ci]" && git push origin HEAD:docs/bilingual-civilization-pdfs-20261116)
