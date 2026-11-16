@@ -11,24 +11,26 @@
       "language": "en",
       "zenodo_name": "01_EN_The_Second_Age_of_Intelligence.pdf",
       "github_path": "civilization-strategy/en/pdf/02_The_Second_Age_of_Intelligence.pdf",
-      "zenodo_md5_from_published_page": "c5d31306347f29c584eb12222854f79e",
       "github_size_bytes": 50077,
       "github_md5": "c5d3130634f729c584eb12222854f79e",
       "github_sha256": "029b29b4026bd2fef153eacd3b6c349072fd773d755d960f571867bd5c1ca26a",
-      "same_content_as_zenodo_screenshot_md5": false
+      "zenodo_api_file_size_bytes": 50077,
+      "zenodo_api_md5": "c5d3130634f729c584eb12222854f79e",
+      "identical_to_published_zenodo_file": true
     },
     {
       "language": "zh",
       "zenodo_name": "02_ZH_Second_Age_of_Intelligence.pdf",
       "github_path": "civilization-strategy/zh/pdf/02_ZH_Second_Age_of_Intelligence.pdf",
-      "zenodo_md5_from_published_page": "2c7738c8b842747b392be07f9c9c4e34",
       "github_size_bytes": 647135,
       "github_md5": "2c7738c8b642747b392be07f9c9c4e34",
       "github_sha256": "aa937981b5c8c08ff93f5fae7ba3dab5ccff74c4cb161cf69a9c26d270ebcb37",
-      "same_content_as_zenodo_screenshot_md5": false
+      "zenodo_api_file_size_bytes": 647135,
+      "zenodo_api_md5": "2c7738c8b642747b392be07f9c9c4e34",
+      "identical_to_published_zenodo_file": true
     }
   ],
-  "checksum_reference": "Published Zenodo page screenshots supplied by the author on 2026-11-16",
+  "checksum_reference": "Zenodo published-record REST API (https://zenodo.org/api/records/24273009); file checksum and size compared with GitHub main PDF binaries",
   "checked_at_utc": "2026-11-16T07:41:16.110277+00:00",
   "zenodo_api_retrieved": true,
   "api_doi": "10.5281/zenodo.24273009",
@@ -44,5 +46,14 @@
       "size": 647135,
       "checksum": "md5:2c7738c8b642747b392be07f9c9c4e34"
     }
-  ]
+  ],
+  "zenodo_author_metadata_as_published": [
+    {
+      "name": "Kun, Yuan",
+      "affiliation": "TRANTOR LABS, Singapore"
+    }
+  ],
+  "binary_parity_verified": true,
+  "verification_result": "Zenodo published PDFs are byte-identical to the two current GitHub PDFs (MD5 and byte size checked).",
+  "source_git_main": "https://github.com/TrantorLabs/Research"
 }
