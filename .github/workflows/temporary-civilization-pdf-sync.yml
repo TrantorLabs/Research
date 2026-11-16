@@ -1,0 +1,108 @@
+name: Temporary civilization charter PDF/ZIP synchronization
+on:
+  push:
+    branches: [docs/civilization-risk-language-20261116]
+    paths: ['.github/workflows/temporary-civilization-pdf-sync.yml']
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: docs/civilization-risk-language-20261116
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y pandoc fonts-noto-cjk
+          python -m pip install weasyprint==68.0 pymupdf
+      - name: Render changed Chinese and English PDFs and repack eight records
+        run: |
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+          from hashlib import sha256
+          from zipfile import ZipFile, ZIP_DEFLATED
+          from weasyprint import HTML
+          import fitz
+          root=Path('civilization-strategy')
+          z=root/'zh'
+          e=root/'en'
+          cn_pdf=z/'pdf'/'02_ZH_Second_Age_of_Intelligence.pdf'
+          en_pdf=e/'pdf'/'02_The_Second_Age_of_Intelligence.pdf'
+          rows=[
+            ('02', z/'01-second-age-of-intelligence.md', cn_pdf, 'ZH'),
+            ('02', e/'01-second-age-of-intelligence.md', en_pdf, 'EN'),
+          ]
+          css_cn="""@page {size:A4;margin:15mm 16mm;} body{font-family:'Noto Serif CJK SC','Noto Sans CJK SC',serif;color:#202020;font-size:10pt;line-height:1.48;}h1,h2,h3,h4{font-family:'Noto Sans CJK SC',sans-serif;line-height:1.34;break-after:avoid;color:#1b2633;}h1{font-size:17pt;margin:0 0 12pt;}h2{font-size:12.5pt;margin:15pt 0 7pt;}h3{font-size:11pt;margin:11pt 0 6pt;}h4{font-size:10.5pt;}p,li{orphans:2;widows:2;}p{margin:0 0 8pt;}ul,ol{margin:6pt 0 8pt;padding-left:20pt;}li{margin:3pt 0;}a{color:#155c92;text-decoration:none;overflow-wrap:anywhere;word-break:break-word;}hr{border:0;border-top:.6pt solid #bbb;margin:13pt 0;}pre,code{white-space:pre-wrap;overflow-wrap:anywhere;}img{max-width:100%;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #aaa;padding:4pt;text-align:left;vertical-align:top;}blockquote{padding-left:9pt;border-left:2pt solid #bbb;margin:8pt 0;}"""
+          css_en="""@page {size:A4;margin:15mm 16mm;}body{font-family:DejaVu Serif,Georgia,serif;font-size:10pt;line-height:1.42;color:#222;}h1,h2,h3{font-family:DejaVu Sans,Arial,sans-serif;line-height:1.25;break-after:avoid;}h1{font-size:17pt;}h2{font-size:12.5pt;margin-top:14pt;}h3{font-size:11pt;margin-top:10pt;}p{margin:0 0 7pt;orphans:2;widows:2;}a{color:#155c92;overflow-wrap:anywhere;text-decoration:none;}hr{border:0;border-top:0.5pt solid #ccc;}pre{white-space:pre-wrap;overflow-wrap:anywhere;}img{max-width:100%;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #ccc;padding:4pt;text-align:left;vertical-align:top;}"""
+          for _,src,dst,lang in rows:
+              text=src.read_text(encoding='utf-8')
+              if lang=='ZH':
+                  assert '局部技术失误或个体生活变化本身' not in text
+              else:
+                  assert 'A local technical failure or a change in an individual' not in text
+              html=subprocess.check_output(['pandoc','-f','markdown+autolink_bare_uris','-t','html5',str(src)],text=True)
+              dst.parent.mkdir(exist_ok=True)
+              css=css_cn if lang=='ZH' else css_en
+              HTML(string='<html lang="'+('zh-CN' if lang=='ZH' else 'en')+'"><meta charset="utf-8"><style>'+css+'</style><body>'+html+'</body></html>',base_url=str(src.parent.resolve())).write_pdf(str(dst))
+              with fitz.open(dst) as pdf:
+                  extracted=' '.join(page.get_text() for page in pdf)
+                  assert len(extracted)>4000 and pdf.page_count>1
+                  assert sum(len(page.get_links()) for page in pdf)>=3
+                  assert ('Whether a particular harm rises' not in extracted) and ('局部技术失误或个体生活变化' not in extracted)
+                  print('REGENERATED',dst,'pages',pdf.page_count,'links',sum(len(page.get_links()) for page in pdf),'bytes',dst.stat().st_size)
+          specs=[
+            ('02','ZH',cn_pdf,z/'01-second-age-of-intelligence.md'),
+            ('02','EN',en_pdf,e/'01-second-age-of-intelligence.md'),
+            ('03','ZH',z/'pdf'/'03_ZH_AI_Safety_Real_Control_and_Accountability.pdf',z/'02-ai-safety-a-v1.0.md'),
+            ('03','EN',e/'pdf'/'03_AI_Safety_Effective_Control_and_Accountability.pdf',e/'02-ai-safety-a.md'),
+            ('04','ZH',z/'pdf'/'04_ZH_MindOS_Native_Minds_and_Governable_Intelligence.pdf',z/'03-mindos-b-v1.0.md'),
+            ('04','EN',e/'pdf'/'04_MindOS_AI_Native_Minds_and_Governable_Intelligence.pdf',e/'03-mindos-b.md'),
+            ('05','ZH',z/'pdf'/'05_ZH_Civilizational_Fork_Human_Agency.pdf',z/'04-human-agency-c-v1.0.md'),
+            ('05','EN',e/'pdf'/'05_The_Civilizational_Fork_Human_Agency.pdf',e/'04-human-agency-c.md')
+          ]
+          arch=root/'archives'/'2026-11-16'
+          zip_path=arch/'02-05_Soulseed_Civilization_Research_8_PDFs_ZH_EN.zip'
+          intro=['Soulseed civilization research | Bilingual publication archive',
+                 'Eight complete PDF documents: Chinese & English, series 02-05.',
+                 'Source: TrantorLabs/Research, civilization-strategy/{zh,en} in the repository.',
+                 'No translation, paraphrase or trimming was performed in this export.',
+                 'The 02 Chinese and English PDFs have been regenerated after a focused source-language revision.',
+                 'The 03–05 PDF pairs remain unchanged; only the 02 source introduction was edited.',
+                 'Original Markdown source remains in the public GitHub repository.','',
+                 'Files:']
+          checks=[]
+          with ZipFile(zip_path,'w',compression=ZIP_DEFLATED,compresslevel=9) as zipf:
+              for number,lang,pdf,src in specs:
+                  assert pdf.is_file() and src.is_file()
+                  name=pdf.name if lang=='ZH' else f'{number}_EN_{pdf.name.split("_",1)[1]}'
+                  b=pdf.read_bytes()
+                  assert len(b)>10000
+                  source_hash=sha256(src.read_bytes()).hexdigest()
+                  checks.append(f'{sha256(b).hexdigest()}  {name}')
+                  intro.append(f'{name} | source={src.as_posix()} | source_SHA256={source_hash}')
+                  zipf.write(pdf,arcname=name)
+              zipf.writestr('README.txt','\n'.join(intro)+'\n')
+              zipf.writestr('SHA256SUMS.txt','\n'.join(checks)+'\n')
+          (arch/'README.txt').write_text('\n'.join(intro)+'\n',encoding='utf-8')
+          (arch/'SHA256SUMS.txt').write_text('\n'.join(checks)+'\n',encoding='utf-8')
+          with ZipFile(zip_path) as zipf:
+              assert zipf.testzip() is None
+              pdfs=[a for a in zipf.namelist() if a.endswith('.pdf')]
+              assert len(pdfs)==8 and len(set(pdfs))==8
+              for c in checks:
+                  d,n=c.split('  ')
+                  assert sha256(zipf.read(n)).hexdigest()==d
+          print('ARCHIVE_VERIFIED',zip_path,'bytes',zip_path.stat().st_size, 'PDFS',len(pdfs))
+          PY
+      - name: Commit updated PDFs and archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add civilization-strategy/zh/pdf/02_ZH_Second_Age_of_Intelligence.pdf civilization-strategy/en/pdf/02_The_Second_Age_of_Intelligence.pdf civilization-strategy/archives/2026-11-16/
+          git diff --cached --quiet || (git commit -m "docs: synchronize charter PDFs and bilingual archive [skip ci]" && git push origin HEAD:docs/civilization-risk-language-20261116)
