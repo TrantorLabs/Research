@@ -9,6 +9,8 @@ Four complete works by **Kun Yuan**, written for the RainbowCity and Soulseed lo
 | MindOS: Building AI-Native Minds and Governable Intelligence for the Second Age of Intelligence | [Read](./03-mindos-b.md) | [阅读](../zh/03-mindos-b-v1.0.md) |
 | The Civilizational Fork: Safeguarding Human Subjecthood and a Shared Future in the Age of AI | [Read](./04-human-agency-c.md) | [阅读](../zh/04-human-agency-c-v1.0.md) |
 
+**First work — published bilingual edition (16 November 2026):** [Zenodo version DOI 10.5281/zenodo.24273009](https://doi.org/10.5281/zenodo.24273009) · [publication receipt and file checksums](../publication-records/02-second-age-of-intelligence/README.md). The Zenodo release contains both complete English and Chinese PDFs.
+
 The first work sets out our shared civilizational questions and mission. Domain A investigates AI safety science and persistent accountability; Domain B focuses on AI-native minds and governable technical infrastructure; Domain C examines human subjecthood, existential risk, and civilizational coexistence.
 
 Author: **Kun Yuan** · TRANTOR LABS, Singapore
