@@ -1,0 +1,93 @@
+{
+  "id": 24273009,
+  "doi": "10.5281/zenodo.24273009",
+  "conceptdoi": "10.5281/zenodo.24273008",
+  "created": "2026-11-16T07:33:19.047881+00:00",
+  "updated": "2026-11-16T07:33:19.612740+00:00",
+  "metadata": {
+    "title": "The Second Age of Intelligence: A Civilizational Order for Humanity and New Forms of Intelligence",
+    "doi": "10.5281/zenodo.24273009",
+    "publication_date": "2026-11-16",
+    "description": "<p>This work presents a long-term civilizational research vision for humanity's possible transition into the Second Age of Intelligence.</p>\n<p>Drawing on four years of AI entrepreneurship, philosophical inquiry, and systems engineering in Singapore, Kun Yuan examines the challenges arising as artificial intelligence develops persistent identity, increasingly autonomous cognition, independent judgment, and the ability to act in the real world.</p>\n<p>The work identifies five interconnected dimensions of civilizational risk: Survival Risk, Reality Risk, Institutional Risk, Human Agency Risk, and Human Meaning Risk. Together, they concern the fundamental conditions under which human civilization can continue to survive, understand reality, govern effectively, exercise independent judgment, and create meaning.</p>\n<p>To address these challenges, the RainbowCity and Soulseed research program establishes three interconnected but independent research domains:</p>\n<p><strong>A &mdash; AI Safety, Internal Structured Alignment, and Responsibility Governance:</strong> Investigating loss of control, genuine safety, verifiable structural constraints, and persistent accountability.</p>\n<p><strong>B &mdash; AI-Native Cognitive Systems and Security Infrastructure:</strong> Developing foundational research and architectures for persistent AI actors, native cognition, governable intelligence, and MindOS.</p>\n<p><strong>C &mdash; Human Subjecthood, AI Existential Risk, and Civilizational Coexistence:</strong> Investigating human cognitive sovereignty, judgment formation, existential risk, and the conditions for long-term coexistence among different forms of intelligence.</p>\n<p>The central vision is to establish a civilizational order in which humans retain authority over public governance, AI develops within legitimate boundaries, safety and responsibility have real structural foundations, and humanity continues to determine its own future.</p>\n<p>This record preserves the complete English and Chinese editions of the work.</p>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Kun, Yuan",
+        "affiliation": "TRANTOR LABS, Singapore"
+      }
+    ],
+    "keywords": [
+      "Artificial Intelligence Safety",
+      "AI Existential Risk",
+      "Second Age of Intelligence",
+      "Civilizational Governance",
+      "Internal Structured Alignment",
+      "Persistent AI Actors",
+      "Human Agency",
+      "Safety Ontology",
+      "Safety Epistemology",
+      "Civilizational Coexistence"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/TrantorLabs/Research/blob/main/civilization-strategy/en/01-second-age-of-intelligence.md",
+        "relation": "isDerivedFrom",
+        "resource_type": "publication-report",
+        "scheme": "url"
+      },
+      {
+        "identifier": "https://github.com/TrantorLabs/Research/blob/main/civilization-strategy/zh/01-second-age-of-intelligence.md",
+        "relation": "isDerivedFrom",
+        "resource_type": "publication-report",
+        "scheme": "url"
+      }
+    ],
+    "version": "1.0",
+    "language": "eng",
+    "resource_type": {
+      "title": "Report",
+      "type": "publication",
+      "subtype": "report"
+    },
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "communities": [
+      {
+        "id": "trantorlabs"
+      }
+    ],
+    "relations": {
+      "version": [
+        {
+          "index": 0,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "24273008"
+          }
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "id": "4a2bcfff-1f7d-4177-96da-495254b2f1c9",
+      "key": "01_EN_The_Second_Age_of_Intelligence.pdf",
+      "size": 50077,
+      "checksum": "md5:c5d3130634f729c584eb12222854f79e",
+      "links": {
+        "self": "https://zenodo.org/api/records/24273009/files/01_EN_The_Second_Age_of_Intelligence.pdf/content"
+      }
+    },
+    {
+      "id": "23089511-a32f-4eed-8af5-08f17fe42ca3",
+      "key": "02_ZH_Second_Age_of_Intelligence.pdf",
+      "size": 647135,
+      "checksum": "md5:2c7738c8b642747b392be07f9c9c4e34",
+      "links": {
+        "self": "https://zenodo.org/api/records/24273009/files/02_ZH_Second_Age_of_Intelligence.pdf/content"
+      }
+    }
+  ]
+}
