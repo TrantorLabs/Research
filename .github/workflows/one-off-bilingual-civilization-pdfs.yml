@@ -118,14 +118,14 @@ jobs:
           ]
           sums=[]
           for number,lang,path,source in all_files:
-              filename=f'{number}_{lang}_{path.name.split("_",1)[1]}'
+              filename=path.name if lang=='ZH' else f'{number}_EN_{path.name.split("_",1)[1]}'
               digest=sha256(path.read_bytes()).hexdigest()
               source_sha=sha256(source.read_bytes()).hexdigest()
               readme.append(f'{filename} | source={source.as_posix()} | source_SHA256={source_sha}')
               sums.append(f'{digest}  {filename}')
           with zipfile.ZipFile(zip_path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
               for number,lang,path,source in all_files:
-                  filename=f'{number}_{lang}_{path.name.split("_",1)[1]}'
+                  filename=path.name if lang=='ZH' else f'{number}_EN_{path.name.split("_",1)[1]}'
                   z.write(path,arcname=filename)
               z.writestr('README.txt','\n'.join(readme)+'\n')
               z.writestr('SHA256SUMS.txt','\n'.join(sums)+'\n')
