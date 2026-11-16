@@ -2,13 +2,13 @@ Soulseed civilization research | Bilingual publication archive
 Eight complete PDF documents: Chinese & English, series 02-05.
 Source: TrantorLabs/Research, civilization-strategy/{zh,en} in the repository.
 No translation, paraphrase or trimming was performed in this export.
-The four English PDFs are existing public outputs copied unchanged.
-The four Chinese PDFs are generated from the current Chinese Markdown texts.
+The 02 Chinese and English PDFs have been regenerated after a focused source-language revision.
+The 03–05 PDF pairs remain unchanged; only the 02 source introduction was edited.
 Original Markdown source remains in the public GitHub repository.
 
 Files:
-02_ZH_Second_Age_of_Intelligence.pdf | source=civilization-strategy/zh/01-second-age-of-intelligence.md | source_SHA256=bd125f25241c2fe35299ce220df058b26c23347fb0238bdccd5d5d0da4290067
-02_EN_The_Second_Age_of_Intelligence.pdf | source=civilization-strategy/en/01-second-age-of-intelligence.md | source_SHA256=b6ed109b92d1d5d20ad65a6684b8c828a4714384043efc8a0c83de6571721b7b
+02_ZH_Second_Age_of_Intelligence.pdf | source=civilization-strategy/zh/01-second-age-of-intelligence.md | source_SHA256=344aec945d698741a4cc730e3393e2f636acd955c368787a842d9f0819c77dbf
+02_EN_The_Second_Age_of_Intelligence.pdf | source=civilization-strategy/en/01-second-age-of-intelligence.md | source_SHA256=55c13d1cf4b67674b50a172eb4c867b82e755b0b8ae732c2e447af818323d860
 03_ZH_AI_Safety_Real_Control_and_Accountability.pdf | source=civilization-strategy/zh/02-ai-safety-a-v1.0.md | source_SHA256=35a4d6149e4bef201f65fbffbdb8bc4ed514e38915c522fb1a65188f1f5d5a9e
 03_EN_AI_Safety_Effective_Control_and_Accountability.pdf | source=civilization-strategy/en/02-ai-safety-a.md | source_SHA256=74269984c314115fe6d530b1b3f3732f4802488e60763d81a0875070771fca18
 04_ZH_MindOS_Native_Minds_and_Governable_Intelligence.pdf | source=civilization-strategy/zh/03-mindos-b-v1.0.md | source_SHA256=d8485f8a247344b90c250f46cad0a050f5d8f91d4ba6cca6cf41ec03fe50cd3c
